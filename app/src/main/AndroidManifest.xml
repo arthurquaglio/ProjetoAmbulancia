@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjetoAmbulancia"
         tools:targetApi="31">
+        <activity android:name=".TestsActivity" />
+        <activity android:name=".GraphMapActivity" />
+        <activity android:name=".GraphListActivity" />
+        <activity android:name=".HistoryActivity" />
+        <activity android:name=".OccupancyActivity" />
+        <activity android:name=".NewCallActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

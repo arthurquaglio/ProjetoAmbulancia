@@ -20,6 +20,18 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        System.out.println("testesA");
+
+        findViewById(R.id.button_new_call).setOnClickListener(v ->
+                startActivity(new android.content.Intent(this, NewCallActivity.class)));
+        findViewById(R.id.button_occupancy).setOnClickListener(v ->
+                startActivity(new android.content.Intent(this, OccupancyActivity.class)));
+        findViewById(R.id.button_history).setOnClickListener(v ->
+                startActivity(new android.content.Intent(this, HistoryActivity.class)));
+        findViewById(R.id.button_graph_list).setOnClickListener(v ->
+                startActivity(new android.content.Intent(this, GraphListActivity.class)));
+        findViewById(R.id.button_graph_map).setOnClickListener(v ->
+                startActivity(new android.content.Intent(this, GraphMapActivity.class)));
+        findViewById(R.id.button_tests).setOnClickListener(v ->
+                startActivity(new android.content.Intent(this, TestsActivity.class)));
     }
 }
