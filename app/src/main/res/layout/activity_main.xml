@@ -1,58 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="24dp">
+    android:background="?android:attr/colorBackground"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/title_home"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/top_app_bar"
+        style="@style/Widget.ProjetoAmbulancia.Toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="16dp"
-        android:text="Ambulancia - Painel"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:title="Ambulancia"
+        app:titleCentered="true" />
 
-    <Button
-        android:id="@+id/button_new_call"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Novo chamado" />
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-    <Button
-        android:id="@+id/button_occupancy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Lotacao em tempo real" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/space_l">
 
-    <Button
-        android:id="@+id/button_history"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Historico de chamados" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/title_home"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Painel principal"
+                android:textAppearance="@style/TextAppearance.ProjetoAmbulancia.Title" />
 
-    <Button
-        android:id="@+id/button_graph_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Grafo - lista" />
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_xs"
+                android:text="Escolha uma acao para continuar."
+                android:textAppearance="@style/TextAppearance.ProjetoAmbulancia.Body" />
 
-    <Button
-        android:id="@+id/button_graph_map"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Grafo - mapa" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_new_call"
+                style="@style/Widget.ProjetoAmbulancia.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_l"
+                android:text="Novo chamado"
+                app:icon="@android:drawable/ic_input_add"
+                app:iconGravity="textStart"
+                app:iconPadding="@dimen/space_s" />
 
-    <Button
-        android:id="@+id/button_tests"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Testes do enunciado" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_occupancy"
+                style="@style/Widget.ProjetoAmbulancia.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_m"
+                android:text="Lotacao ao vivo"
+                app:icon="@android:drawable/ic_menu_view"
+                app:iconGravity="textStart"
+                app:iconPadding="@dimen/space_s" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_history"
+                style="@style/Widget.ProjetoAmbulancia.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_m"
+                android:text="Historico"
+                app:icon="@android:drawable/ic_menu_recent_history"
+                app:iconGravity="textStart"
+                app:iconPadding="@dimen/space_s" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_graph_list"
+                style="@style/Widget.ProjetoAmbulancia.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_m"
+                android:text="Grafo (lista)"
+                app:icon="@android:drawable/ic_menu_sort_by_size"
+                app:iconGravity="textStart"
+                app:iconPadding="@dimen/space_s" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_graph_map"
+                style="@style/Widget.ProjetoAmbulancia.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_m"
+                android:text="Grafo (mapa)"
+                app:icon="@android:drawable/ic_dialog_map"
+                app:iconGravity="textStart"
+                app:iconPadding="@dimen/space_s" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_tests"
+                style="@style/Widget.ProjetoAmbulancia.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_m"
+                android:text="Testes"
+                app:icon="@android:drawable/ic_menu_manage"
+                app:iconGravity="textStart"
+                app:iconPadding="@dimen/space_s" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_theme_light"
+                style="@style/Widget.ProjetoAmbulancia.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_m"
+                android:text="Alternar tema"
+                app:icon="@android:drawable/ic_menu_day"
+                app:iconGravity="textStart"
+                app:iconPadding="@dimen/space_s" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Widget.ProjetoAmbulancia.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="android:background">?attr/colorSurface</item>
+        <item name="titleTextColor">?attr/colorOnSurface</item>
+        <item name="subtitleTextColor">?attr/colorOnSurfaceVariant</item>
+    </style>
+
+    <style name="Widget.ProjetoAmbulancia.Button" parent="Widget.Material3.Button">
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="cornerRadius">12dp</item>
+    </style>
+
+    <style name="Widget.ProjetoAmbulancia.OutlinedButton" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="cornerRadius">12dp</item>
+    </style>
+
+    <style name="Widget.ProjetoAmbulancia.Card" parent="Widget.MaterialComponents.CardView">
+        <item name="shapeAppearance">@style/ShapeAppearance.ProjetoAmbulancia.Card</item>
+    </style>
+
+    <style name="ShapeAppearance.ProjetoAmbulancia.Card" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerSize">@dimen/card_corner</item>
+    </style>
+
+    <style name="TextAppearance.ProjetoAmbulancia.Title" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
+    <style name="TextAppearance.ProjetoAmbulancia.Section" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
+    <style name="TextAppearance.ProjetoAmbulancia.Body" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
+    </style>
+</resources>
+

@@ -3,9 +3,11 @@ package com.example.projetoambulancia;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.textfield.MaterialAutoCompleteTextView;
+import com.google.android.material.textfield.TextInputEditText;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,10 +23,10 @@ import java.util.List;
 public class NewCallActivity extends AppCompatActivity {
 
     private DataRepository repository;
-    private Spinner spinnerBairros;
-    private Spinner spinnerPrioridade;
-    private EditText editPatientName;
-    private EditText editPatientAge;
+    private MaterialAutoCompleteTextView dropdownBairros;
+    private MaterialAutoCompleteTextView dropdownPrioridade;
+    private TextInputEditText editPatientName;
+    private TextInputEditText editPatientAge;
     private TextView textResultado;
 
     @Override
@@ -38,9 +40,12 @@ public class NewCallActivity extends AppCompatActivity {
             return insets;
         });
 
+        MaterialToolbar toolbar = findViewById(R.id.top_app_bar);
+        toolbar.setNavigationOnClickListener(v -> finish());
+
         repository = new DataRepository(this);
-        spinnerBairros = findViewById(R.id.spinner_bairros);
-        spinnerPrioridade = findViewById(R.id.spinner_priority);
+        dropdownBairros = findViewById(R.id.dropdown_bairros);
+        dropdownPrioridade = findViewById(R.id.dropdown_priority);
         editPatientName = findViewById(R.id.edit_patient_name);
         editPatientAge = findViewById(R.id.edit_patient_age);
         textResultado = findViewById(R.id.text_resultado);
@@ -49,24 +54,40 @@ public class NewCallActivity extends AppCompatActivity {
         List<String> bairros = repository.listarBairros();
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_dropdown_item, bairros);
-        spinnerBairros.setAdapter(adapter);
+        dropdownBairros.setAdapter(adapter);
+        if (!bairros.isEmpty()) {
+            dropdownBairros.setText(bairros.get(0), false);
+        }
 
         ArrayAdapter<String> prioridadesAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_dropdown_item,
                 new String[]{"Baixa", "Media", "Alta"});
-        spinnerPrioridade.setAdapter(prioridadesAdapter);
+        dropdownPrioridade.setAdapter(prioridadesAdapter);
+        dropdownPrioridade.setText("Media", false);
 
         buttonRegistrar.setOnClickListener(v -> registrarChamado());
     }
 
     private void registrarChamado() {
-        String bairroSelecionado = (String) spinnerBairros.getSelectedItem();
-        String prioridade = (String) spinnerPrioridade.getSelectedItem();
-        String nomePaciente = editPatientName.getText().toString().trim();
-        String idadeTexto = editPatientAge.getText().toString().trim();
+        String bairroSelecionado = dropdownBairros.getText() != null
+                ? dropdownBairros.getText().toString().trim()
+                : "";
+        String prioridade = dropdownPrioridade.getText() != null
+                ? dropdownPrioridade.getText().toString().trim()
+                : "";
+        String nomePaciente = editPatientName.getText() != null
+                ? editPatientName.getText().toString().trim()
+                : "";
+        String idadeTexto = editPatientAge.getText() != null
+                ? editPatientAge.getText().toString().trim()
+                : "";
 
-        if (bairroSelecionado == null) {
+        if (bairroSelecionado.isEmpty()) {
             textResultado.setText("Selecione um bairro.");
+            return;
+        }
+        if (prioridade.isEmpty()) {
+            textResultado.setText("Selecione a prioridade.");
             return;
         }
         if (nomePaciente.isEmpty()) {

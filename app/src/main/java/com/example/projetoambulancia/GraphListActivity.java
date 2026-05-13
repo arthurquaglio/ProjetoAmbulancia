@@ -1,8 +1,8 @@
 package com.example.projetoambulancia;
 
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.projetoambulancia.data.DataRepository;
 import com.example.projetoambulancia.data.GraphData;
+import com.google.android.material.appbar.MaterialToolbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,8 @@ import java.util.Map;
 public class GraphListActivity extends AppCompatActivity {
 
     private DataRepository repository;
-    private ListView listView;
+    private RecyclerView recyclerView;
+    private SimpleTextAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +35,14 @@ public class GraphListActivity extends AppCompatActivity {
             return insets;
         });
 
+        MaterialToolbar toolbar = findViewById(R.id.top_app_bar);
+        toolbar.setNavigationOnClickListener(v -> finish());
+
         repository = new DataRepository(this);
-        listView = findViewById(R.id.list_graph);
+        recyclerView = findViewById(R.id.list_graph);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new SimpleTextAdapter();
+        recyclerView.setAdapter(adapter);
         carregarLista();
     }
 
@@ -46,9 +54,7 @@ public class GraphListActivity extends AppCompatActivity {
             String linha = entry.getKey() + ": " + String.join(", ", entry.getValue());
             linhas.add(linha);
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, linhas);
-        listView.setAdapter(adapter);
+        adapter.submitList(linhas);
     }
 }
 

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Widget.ProjetoAmbulancia.Card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/space_s"
+    android:layout_marginHorizontal="@dimen/space_m"
+    android:layout_marginTop="@dimen/space_s">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/text_primary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/card_padding"
+        android:textAppearance="@style/TextAppearance.ProjetoAmbulancia.Body" />
+</com.google.android.material.card.MaterialCardView>
+

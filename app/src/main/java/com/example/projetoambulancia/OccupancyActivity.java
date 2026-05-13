@@ -3,8 +3,8 @@ package com.example.projetoambulancia;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,14 +14,15 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.projetoambulancia.data.DataRepository;
 import com.example.projetoambulancia.data.UnidadeSaude;
+import com.google.android.material.appbar.MaterialToolbar;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class OccupancyActivity extends AppCompatActivity {
 
     private DataRepository repository;
-    private ListView listView;
+    private RecyclerView recyclerView;
+    private OccupancyAdapter adapter;
     private final Handler handler = new Handler(Looper.getMainLooper());
     private final Runnable refreshTask = this::carregarLista;
 
@@ -36,8 +37,14 @@ public class OccupancyActivity extends AppCompatActivity {
             return insets;
         });
 
+        MaterialToolbar toolbar = findViewById(R.id.top_app_bar);
+        toolbar.setNavigationOnClickListener(v -> finish());
+
         repository = new DataRepository(this);
-        listView = findViewById(R.id.list_occupancy);
+        recyclerView = findViewById(R.id.list_occupancy);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new OccupancyAdapter();
+        recyclerView.setAdapter(adapter);
         carregarLista();
     }
 
@@ -56,17 +63,14 @@ public class OccupancyActivity extends AppCompatActivity {
 
     private void carregarLista() {
         List<UnidadeSaude> unidades = repository.listarUnidadesComBairro();
-        List<String> linhas = new ArrayList<>();
-        for (UnidadeSaude unidade : unidades) {
-            String linha = unidade.getNome() + " - " + unidade.getBairroNome()
-                    + " | Livres: " + unidade.getLeitosLivres()
-                    + " | Ocupados: " + unidade.getLeitosOcupados()
-                    + "/" + unidade.getLeitosTotais();
-            linhas.add(linha);
-        }
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, linhas);
-        listView.setAdapter(adapter);
+        unidades.sort((a, b) -> {
+            int diff = Integer.compare(b.getLeitosLivres(), a.getLeitosLivres());
+            if (diff != 0) {
+                return diff;
+            }
+            return a.getNome().compareToIgnoreCase(b.getNome());
+        });
+        adapter.submitList(unidades);
         handler.removeCallbacks(refreshTask);
         handler.postDelayed(refreshTask, 3000);
     }

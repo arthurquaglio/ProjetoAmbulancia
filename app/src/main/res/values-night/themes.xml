@@ -2,6 +2,22 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.ProjetoAmbulancia" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">@color/brand_primary</item>
+        <item name="colorOnPrimary">@color/brand_on_primary</item>
+        <item name="colorSecondary">@color/brand_secondary</item>
+        <item name="colorOnSecondary">@color/brand_on_secondary</item>
+        <item name="colorTertiary">@color/brand_tertiary</item>
+        <item name="colorOnTertiary">@color/brand_on_tertiary</item>
+        <item name="colorSurface">#111827</item>
+        <item name="colorOnSurface">#E5E7EB</item>
+        <item name="colorSurfaceVariant">#1F2937</item>
+        <item name="colorOnSurfaceVariant">#94A3B8</item>
+        <item name="android:colorBackground">#0F172A</item>
+        <item name="colorOnBackground">#E5E7EB</item>
+        <item name="colorOutline">#334155</item>
+        <item name="colorError">@color/error</item>
+
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 </resources>

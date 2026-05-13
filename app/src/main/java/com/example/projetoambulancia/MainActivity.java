@@ -33,5 +33,18 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new android.content.Intent(this, GraphMapActivity.class)));
         findViewById(R.id.button_tests).setOnClickListener(v ->
                 startActivity(new android.content.Intent(this, TestsActivity.class)));
+
+        findViewById(R.id.button_theme_light).setOnClickListener(v -> {
+            int currentMode = getResources().getConfiguration().uiMode
+                    & android.content.res.Configuration.UI_MODE_NIGHT_MASK;
+            boolean isNight = currentMode == android.content.res.Configuration.UI_MODE_NIGHT_YES;
+            androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(
+                    isNight
+                            ? androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
+                            : androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES);
+            android.widget.Toast.makeText(this,
+                    isNight ? "Tema claro ativado" : "Tema escuro ativado",
+                    android.widget.Toast.LENGTH_SHORT).show();
+        });
     }
 }
